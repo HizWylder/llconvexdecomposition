@@ -1,0 +1,4 @@
+ autobuild.sh build -c default --no-configure
+cd stage/
+tar -cpzf llconvexdecomposition-0.3-linux-20120206.tar.gz  ./*
+md5sum llconvexdecomposition-0.3-linux-20120206.tar.gz  
