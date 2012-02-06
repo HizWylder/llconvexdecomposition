@@ -1,0 +1,4 @@
+syntax: glob
+stage
+*.o
+*.a

@@ -1,0 +1,40 @@
+# example Makefile
+
+HEADERS_STUB:=LLConvexDecomposition.h LLConvexDecompositionStubImpl.h
+SOURCES_STUB:=LLConvexDecomposition.cpp LLConvexDecompositionStubImpl.cpp
+
+OBJECTS_RELEASE_STUB:=$(addprefix release_stub/,$(SOURCES_STUB:.cpp=.o))
+OBJECTS_DEBUG_STUB:=$(addprefix debug_stub/,$(SOURCES_STUB:.cpp=.o))
+
+CXXFLAGS_STUB:= -DLL_CONVEX_DECOMP_STUB
+RELEASE_CXXFLAGS:=-O3 -m32 -msse2 -Wno-invalid-offsetof $(CXXFLAGS)
+DEBUG_CXXFLAGS:=-g -m32 -msse2 -Wno-invalid-offsetof $(CXXFLAGS)
+
+all: stub stub_debug
+
+stub: release_stub/libllconvexdecompositionstub.a
+
+stub_debug: debug_stub/libllconvexdecompositionstub.a
+
+#All .unpacked dependencies will rely on a corresponding .dir
+%/.unpacked: %.dir
+
+release_stub/libllconvexdecompositionstub.a: $(OBJECTS_RELEASE_STUB)
+	$(AR) rc $@ $^
+
+debug_stub/libllconvexdecompositionstub.a: $(OBJECTS_DEBUG_STUB)
+	$(AR) rc $@ $^
+
+debug_stub/%.o:	%.cpp debug_stub.dir
+	$(CXX) -o $@ -c $< $(DEBUG_CXXFLAGS) $(CXXFLAGS_STUB)
+
+release_stub/%.o:	%.cpp release_stub.dir
+	$(CXX) -o $@ -c $< $(RELEASE_CXXFLAGS) $(CXXFLAGS_STUB)
+
+# Create directories with names of the target minus '.dir' suffix
+%.dir:
+	mkdir -p $*; rm -f $*/*
+
+clean:
+	$(RM) -rf release_stub debug_stub 
+

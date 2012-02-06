@@ -1,0 +1,16 @@
+data/.hgignore.i
+data/BuildParams.i
+data/Source/LICENSE_STUB.txt.i
+data/Source/LLConvexDecomposition.sln.i
+data/Source/lib/LLConvexDecomposition.cpp.i
+data/Source/lib/LLConvexDecomposition.h.i
+data/Source/lib/LLConvexDecompositionStub.vcproj.i
+data/Source/lib/LLConvexDecompositionStub.vcxproj.i
+data/Source/lib/LLConvexDecompositionStubImpl.cpp.i
+data/Source/lib/LLConvexDecompositionStubImpl.h.i
+data/Source/lib/Makefile.i
+data/Source/lib/Makefile_mac.i
+data/Source/lib/windowsincludes.h.i
+data/autobuild.xml.i
+data/build-cmd.sh.i
+data/build.sh.i
